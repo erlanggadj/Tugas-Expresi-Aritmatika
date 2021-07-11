@@ -1,6 +1,7 @@
-#include <iostream>
-#include <stack>
-#include <ctype.h>
+//Erlangga Dwi Jiwantoro 2017051020
+//Aniisah Mufiidah Suharso 2017051012
+//Muhammad Hanif 2017051004
+#include <bits/stdc++.h>
 using namespace std;
 
 vector <string> infix;
@@ -8,6 +9,7 @@ vector <string> postfix;
 string simpan, temp, add;
 char input;
 stack <string> P;
+stack <string> V;
 
 bool isOperand (char op){
 	int ascii = (int) op;
@@ -105,9 +107,7 @@ void inputInfix(){
 		temp.clear();
 	}
 	
-	//for (auto x = infix.begin(); x != infix.end(); ++x){
-	//	cout << *x << " ";
-	//}
+	
 }
 
 vector <string>::iterator j;
@@ -155,6 +155,75 @@ void toPostfix(){
 	}
 }
 
+int v1, v2, v3;
+string v4;
+vector <string>::iterator k;
+
+void evaluate(){
+	stringstream ss;
+	int l = 0;
+	for (k = postfix.begin(); k != postfix.end(); k++, l++){
+		if (isOperand(postfix[l].back())){
+			V.push(postfix[l]);
+			continue;
+		}
+		if (isOperator(postfix[l][0])){
+			v1 = atoi ((V.top()).c_str());
+			V.pop();
+			v2 = atoi ((V.top()).c_str());
+			V.pop();
+			if (postfix[l] == "+"){
+				v3 = v2 + v1;
+				ss << v3;
+				string str = ss.str();
+				V.push(str);
+			}
+			else if (postfix[l] == "-"){
+				v3 = v2 - v1;
+				ss << v3;
+				string str = ss.str();
+				V.push(str);
+			}
+			else if (postfix[l] == "*"){
+				v3 = v2 * v1;
+				ss << v3;
+				string str = ss.str();
+				V.push(str);
+			}
+			else if (postfix[l] == "/"){
+				v3 = v2 / v1;
+				ss << v3;
+				string str = ss.str();
+				V.push(str);
+			}
+			else if (postfix[l] == "%"){
+				v3 = v2 % v1;
+				ss << v3;
+				string str = ss.str();
+				V.push(str);
+			}
+			continue;
+		}
+	}
+	v4 = V.top();
+	V.pop();
+	cout << v4;
+}
+
+
 int main(){
-  
+	
+	inputInfix();
+	//cout << "Print : ";
+	//for (auto x = infix.begin(); x != infix.end(); ++x){
+	//	cout << *x << " ";
+	//}
+	toPostfix();
+	//cout << "Print : ";
+	//for (auto x = postfix.begin(); x != postfix.end(); ++x){
+	//	cout << *x << " ";
+	//}
+	evaluate();
+	
+	return 0;
 }
