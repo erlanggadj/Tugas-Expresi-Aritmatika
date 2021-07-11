@@ -1,6 +1,10 @@
 #include <iostream>
+#include  <string>
+#include <cstring>
 using namespace std;
-int main(){
-  
-  return 0;
-}
+
+int main (){
+    string kata;
+    getline(cin,kata);    
+    cout<<"Print : ";
+	  int N =  kata.length();
