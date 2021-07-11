@@ -24,7 +24,7 @@ for(int x = 0; x < N ; x++){
         else if (kata[x] == '-' && kata[x+1] == '(' ){ 
             cout << "-1 * ";
         }    
-        else if (kata[x] >= ''){
+        else if (kata[x] >= '0'){
             cout << kata[x];
         }
         else if (kata[x] == '('){
