@@ -1,3 +1,7 @@
+//Erlangga Dwi Jiwantoro 2017051020
+//Aniisah Mufiidah Suharso 2017051012
+//Muhammad Hanif 2017051004
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -157,6 +161,7 @@ int main(){
 	
 	inputInfix();
 	toPostfix();
+	cout << "Print : ";
 	for (auto x = postfix.begin(); x != postfix.end(); ++x){
 		cout << *x << " ";
 	}
