@@ -51,9 +51,45 @@ void inputInfix(){
         }
     }
     
-    //
+    for (int i = 0; i < (int) simpan.size(); i++){
+		
+		if (isOperand(simpan[i]) || (simpan[i] == '-' && i == 0 && isOperand(simpan[i+1]))){
+			temp.push_back(simpan[i]);
+			continue;
+		}
+		if (isOperator(simpan[i])){
+			if ((int) temp.size() != 0){
+				infix.push_back(temp);
+				temp.clear();
+			}
+			if ((simpan[i] == '-' && isOperator(simpan[i-1]))
+			|| (simpan[i] == '-' && i == 0 && (simpan[i+1] == '('))
+			|| (simpan[i] == '-' && (simpan[i-1] == '('))){
+				infix.push_back("-1");
+				infix.push_back("*");
+			}
+			else {
+				infix.push_back(simpan.substr(i, 1));
+			}
+		}
+		if (isParenthesis(simpan[i])){
+			if ((int) temp.size() != 0){
+				infix.push_back(temp);
+				temp.clear();
+			}
+			infix.push_back(simpan.substr(i, 1));
+		}
+	}
+	
+	if ((int) temp.size() != 0){
+		infix.push_back(temp);
+		temp.clear();
+	}
 }
 
 int main(){
     inputInfix();
+    for (auto x = infix.begin(); x != infix.end(); ++x){
+		cout << *x << " ";
+	}
 }
