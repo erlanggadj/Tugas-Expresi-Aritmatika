@@ -88,4 +88,8 @@ void pushData(){
             }
         }
     }
+     if(temp.length() != 0){
+        infix.push_back(temp);
+        temp.clear();
+    }
 }
