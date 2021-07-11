@@ -10,16 +10,16 @@ int main (){
 int N =  kata.length();
 for(int x = 0; x < N ; x++){
         if(kata[x] == '-' && (kata[x-1] == '+' || kata[x-1] == '-' ||kata[x-1] == '*' || kata[x-1] == '/'|| kata[x-1] == '%' )){
-            cout << "-1 * "
+            cout << "-1 * ";
         }
         else if (kata[x] == '-' && (kata[x-1] >= '0'|| kata[x-2] >= '0')){
-            cout << " " << kata[x] << " "
+            cout << " " << kata[x] << " ";
         } 
         else if (kata[x] == '-' && kata[x+1] >= '0'){
-            cout << kata[x]
+            cout << kata[x];
         }
         else if (kata[x-1] >= '0' && kata[x] == '-' ){
-            cout << " " << kata[x] << " "
+            cout << " " << kata[x] << " ";
         }
         else if (kata[x] == '-' && kata[x+1] == '(' ){ 
-            cout << "-1 * "
+            cout << "-1 * ";
