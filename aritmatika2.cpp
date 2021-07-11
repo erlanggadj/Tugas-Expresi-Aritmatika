@@ -19,9 +19,10 @@ int prioritet(string r){
        r == "-"   ){
         return 1;
     }
-    else(r == "*" ||
-         r == "/" ||
-         r == "%"   ){
-       return 0;
+    else if(r == "*" ||
+            r == "/" ||
+            r == "%"   ){
+        return 2;
     }
+    return 0;
 }
