@@ -34,4 +34,4 @@ bool grande(string r, string s){
     return Nilai1 <= Nilai2;
 }
 
-vector <string> infix;
+vector <string> infix; vector <string> postfix; string temp; vector <string>::iterator remake; vector <string>::iterator itu;
