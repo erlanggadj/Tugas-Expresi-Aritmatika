@@ -13,3 +13,15 @@ bool oibreoir(char r){
         return false;
     }
 }
+
+int prioritet(string r){
+    if(r == "+" ||
+       r == "-"   ){
+        return 1;
+    }
+    else(r == "*" ||
+         r == "/" ||
+         r == "%"   ){
+       return 0;
+    }
+}
