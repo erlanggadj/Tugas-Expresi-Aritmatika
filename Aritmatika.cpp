@@ -1,3 +1,7 @@
+//Erlangga dwi jiwantoro 2017051020
+//Aniisah mufiidah suharso 2017051012
+//Muhammad hanif 2017051004
+
 #include <iostream>
 #include  <string>
 #include <cstring>
