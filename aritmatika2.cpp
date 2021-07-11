@@ -26,3 +26,10 @@ int prioritet(string r){
     }
     return 0;
 }
+
+bool grande(string r, string s){
+    int Nilai1, Nilai2;
+    Nilai1 = prioritet(r); Nilai2 = prioritet(s);
+    
+    return Nilai1 <= Nilai2;
+}
