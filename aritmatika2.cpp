@@ -4,7 +4,7 @@ using namespace std;
 vector <string> infix;
 vector <string> postfix;
 string simpan, temp, add;
-char input, s;
+char input;
 stack <string> P;
 
 bool isOperand (char op){
@@ -115,7 +115,7 @@ void toPostfix(){
 			continue;
 		}
 		if (infix[j] == '('){
-			P.push_back(infix[j]);
+			P.push(infix[j]);
 			continue;
 		}
 		if (infix[j] == ')'){
@@ -129,7 +129,7 @@ void toPostfix(){
 		}
 		if (isOperator(infix[j])){
 			if (P.empty() || (P.top() == '(')){
-				P.push_back(infix[j]);
+				P.push(infix[j]);
 			}
 			else {
 				while (!P.empty() && (P.top() != '(') && precedence(infix[j], P.top())){
@@ -137,8 +137,7 @@ void toPostfix(){
 					postfix.push_back(add);
 					P.pop();
 				}
-				s = infix[j]
-				P.push_back(s);
+				P.push(infix[j]);
 			}
 			continue;
 		}
