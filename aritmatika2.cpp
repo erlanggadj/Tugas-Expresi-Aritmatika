@@ -33,3 +33,5 @@ bool grande(string r, string s){
     
     return Nilai1 <= Nilai2;
 }
+
+vector <string> infix;
