@@ -1,95 +1,162 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool isOperator (char op){
-    if (op == '+' || op == '-' || op == '*' || op == '/' || op == '%'){
-        return true;
-    }
-    else{
-        return false;
-    }
+vector <string> infix;
+vector <string> postfix;
+string simpan, temp, add;
+char input, s;
+stack <string> P;
+
+bool isOperand (char op){
+	int ascii = (int) op;
+	if (ascii >= 48 && ascii <= 57){
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
-int compareOp (char com){
-    int a;
-    
-    if (com == "+" || com == "-"){
-        a = 1;
-    }
-    else if (com == "*" || com == "/" || com == "%"){
-        a = 2;
-    }
-    
-    return a;
+bool isParenthesis (char p){
+	if (p == '(' || p == ')'){
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool isOperator (char ch){
+	if (ch == '*' || ch == '/' || ch == '+' || ch == '-' || ch == '%'){
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+int compare (char pre){
+	int a;
+	
+	if (pre == '*' || pre == '/' || pre == '%'){
+		a = 2;
+	}
+	else if (pre == '+' || pre == '-'){
+		a = 1;
+	}
+	
+	return a;
 }
 
 bool precedence (char a, char b){
-    int N1, N2;
-    N1 = conpareOp(a);
-    N2 = compareOp(b);
-    
-    return N1 <= N2;
+	int value1, value2;
+	value1 = compare(a);
+	value2 = compare(b);
+	
+	return value1 <= value2;
 }
 
-vector <string> infix;
-vector <string> postfix;
-string temp;
-vector <string>::iterator remake;
-vector <string>::iterator that;
+void inputInfix(){
+	
+	//menyimpan inputan infix tanpa spasi
+	while (cin.get(input)){
+		if (input != ' '){
+			simpan.push_back(input);
+		}
+		if (input == '\n'){
+			break;
+		}
+	}
+	
+	for (int i = 0; i < (int) simpan.size(); i++){
+		
+		if (isOperand(simpan[i]) || (simpan[i] == '-' && i == 0 && isOperand(simpan[i+1]))){
+			temp.push_back(simpan[i]);
+			continue;
+		}
+		if (isOperator(simpan[i])){
+			if ((int) temp.size() != 0){
+				infix.push_back(temp);
+				temp.clear();
+			}
+			if ((simpan[i] == '-' && isOperator(simpan[i-1]))
+			|| (simpan[i] == '-' && i == 0 && (simpan[i+1] == '('))
+			|| (simpan[i] == '-' && (simpan[i-1] == '('))){
+				infix.push_back("-1");
+				infix.push_back("*");
+			}
+			else {
+				infix.push_back(simpan.substr(i, 1));
+			}
+		}
+		if (isParenthesis(simpan[i])){
+			if ((int) temp.size() != 0){
+				infix.push_back(temp);
+				temp.clear();
+			}
+			infix.push_back(simpan.substr(i, 1));
+		}
+	}
+	
+	if ((int) temp.size() != 0){
+		infix.push_back(temp);
+		temp.clear();
+	}
+	
+	//for (auto x = infix.begin(); x != infix.end(); ++x){
+	//	cout << *x << " ";
+	//}
+}
 
-void pushData(){
-    string masuk;
-    char data;
-    
-    while(cin.get(data)){
-        if(data == '\n'){
-            break;
-        }
-        if(data != ' '){
-            masuk.push_back(data);
-        }
-    }
-    int length = masuk.length();
+void toPostfix(){
+	for (auto j = infix.begin(); j != infix.end(); ++j){
+		if (isOperand(infix[j])){
+			postfix.push_back(infix[j]);
+			continue;
+		}
+		if (infix[j] == '('){
+			P.push_back(infix[j]);
+			continue;
+		}
+		if (infix[j] == ')'){
+			while (!P.empty() && (P.top() != '(')){
+				add = P.top();
+				postfix.push_back(add);
+				P.pop()
+			}
+			P.pop();
+			continue;
+		}
+		if (isOperator(infix[j])){
+			if (P.empty() || (P.top() == '(')){
+				P.push_back(infix[j]);
+			}
+			else {
+				while (!P.empty() && (P.top() != '(') && precedence(infix[j], P.top())){
+					add = P.top();
+					postfix.push_back(add);
+					P.pop();
+				}
+				s = infix[j]
+				P.push_back(s);
+			}
+			continue;
+		}
+	}
+	
+	while (!P.empty()){
+		add = P.top();
+		postfix.push_back(add);
+		P.pop();
+	}
+}
 
-    for(int i = 0; i < length; i++){
-        if(masuk[i] == '(' ||
-           masuk[i] == ')'){
-            if(temp.length() != 0){
-                infix.push_back(temp);
-                temp.clear();
-            }
-            infix.push_back(masuk.substr(i, 1));
-        }
-        if(isdigit(masuk[i]) ||
-           (masuk[i] == '-' &&
-            i == 0 &&
-            isdigit(masuk[i+1]))){
-            
-            temp.push_back(masuk[i]);
-            continue;
-        }
-        if(isOperator(masuk[i])){
-            if(temp.length() != 0){
-                
-                infix.push_back(temp);
-                temp.clear();
-            }
-            if((masuk[i] == '-' &&
-                isOperator(masuk[i-1])) ||
-               (masuk[i] == '-' &&
-                i == 0 && masuk[i+1] == '(') ||
-               (masuk[i] == '-' &&
-                masuk[i-1] == '(')){
-                
-                infix.push_back("-1");
-                infix.push_back("*");
-            }else{
-                infix.push_back(masuk.substr(i, 1));
-            }
-        }
-    }
-     if(temp.length() != 0){
-        infix.push_back(temp);
-        temp.clear();
-    }
+int main(){
+	
+	inputInfix();
+	for (auto x = postfix.begin(); x != postfix.end(); ++x){
+		cout << *x << " ";
+	}
+	
+	return 0;
 }
