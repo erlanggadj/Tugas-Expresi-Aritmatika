@@ -1,12 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool oibreoir(char r){
-    if(r == '+' || 
-       r == '-' || 
-       r == '*' || 
-       r == '/' || 
-       r == '%'   ){
+bool isOperator (char op){
+    if (op == '+' || op == '-' || op == '*' || op == '/' || op == '%'){
         return true;
     }
     else{
@@ -14,29 +10,32 @@ bool oibreoir(char r){
     }
 }
 
-int prioritet(string r){
-    if(r == "+" ||
-       r == "-"   ){
-        return 1;
-    }
-    else if(r == "*" ||
-            r == "/" ||
-            r == "%"   ){
-        return 2;
-    }
-    return 0;
-}
-
-bool grande(string r, string s){
-    int Nilai1, Nilai2;
-    Nilai1 = prioritet(r); Nilai2 = prioritet(s);
+int compareOp (char com){
+    int a;
     
-    return Nilai1 <= Nilai2;
+    if (com == "+" || com == "-"){
+        a = 1;
+    }
+    else if (com == "*" || com == "/" || com == "%"){
+        a = 2;
+    }
+    
+    return a;
 }
 
-vector <string> infix; vector <string> postfix; string temp; vector <string>::iterator remake; vector <string>::iterator itu;
+bool precedence (char a, char b){
+    int N1, N2;
+    N1 = conpareOp(a);
+    N2 = compareOp(b);
+    
+    return N1 <= N2;
+}
 
-int main(){
-    MasukkanData();
-    InfixtoPostfix();
+vector <string> infix;
+vector <string> postfix;
+string temp;
+vector <string>::iterator remake;
+vector <string>::iterator that;
+
+void pushData(){
 }
