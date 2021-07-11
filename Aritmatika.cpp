@@ -2,49 +2,58 @@
 //Aniisah Mufiidah Suharso 2017051012
 //Muhammad Hanif 2017051004
 
-#include <iostream>
-#include  <string>
-#include <cstring>
+//HACKERRANK
+
+#include <bits/stdc++.h>
 using namespace std;
 
-int main (){
-    string input;
-    getline(cin, input);
-    
-    cout << "Print : ";
+vector <string> infix;
+string simpan, temp;
+char input;
 
-    for(int i = 0; i < (int) input.size(); i++){
-        if(input[i] == '-' && (input[i-1] == '+' || input[i-1] == '-' ||input[i-1] == '*' || input[i-1] == '/'|| input[i-1] == '%' )){
-            cout << "-1 * ";
+bool isOperand (char op){
+    int ascii = (int) op;
+    if (ascii >= 48 && ascii <= 57){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool isParenthesis (char p){
+    if (p == '(' || p == ')'){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool isOperator (char ch){
+    if (ch == '*' || ch == '/' || ch == '+' || ch == '-' || ch == '%'){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void inputInfix(){
+    
+    //menyimpan inputan infix tanpa spasi
+    while (cin.get(input)){
+        if (input != ' '){
+            simpan.push_back(input);
         }
-        else if (input[i] == '-' && (input[i-1] >= '0'|| input[i-2] >= '0')){
-            cout << " " << input[i] << " ";
-        } 
-        else if (input[i] == '-' && input[i+1] >= '0'){
-            cout << input[i];
-        }
-        else if (input[i-1] >= '0' && input[i] == '-' ){
-            cout << " " << input[i] << " ";
-        }
-        else if (input[i] == '-' && input[i+1] == '(' ){ 
-            cout << "-1 * ";
-        }    
-        else if (input[i] >= '0'){
-            cout << input[i];
-        }
-        else if (input[i] == '('){
-            cout << input[i] << " ";
-        }
-        else if (input[i] == ')'){
-            cout << " " << input[i];
-        }
-        else if (input[i] == '-' && (input[i-1] == '*' || input[i-1] == '+' || input[i-1] == '-' || input[i-1] == '/' || input[i-1] == '%')){
-            cout << "-1 * ";
-        }
-        else if (input[i] == '-' || input[i] == '+' || input[i] '*' || input[i] == '/' || input[i] == '%'){
-            cout << " " << input[i] << " ";
+        if (input == '\n'){
+            break;
         }
     }
     
-    return 0;
+    //
+}
+
+int main(){
+    inputInfix();
 }
