@@ -1,6 +1,6 @@
-//Erlangga dwi jiwantoro 2017051020
-//Aniisah mufiidah suharso 2017051012
-//Muhammad hanif 2017051004
+//Erlangga Dwi Jiwantoro 2017051020
+//Aniisah Mufiidah Suharso 2017051012
+//Muhammad Hanif 2017051004
 
 #include <iostream>
 #include  <string>
@@ -8,32 +8,43 @@
 using namespace std;
 
 int main (){
-    string kata;
-    getline(cin,kata);    
-    cout<<"Print : ";
-int N =  kata.length();
-for(int x = 0; x < N ; x++){
-        if(kata[x] == '-' && (kata[x-1] == '+' || kata[x-1] == '-' ||kata[x-1] == '*' || kata[x-1] == '/'|| kata[x-1] == '%' )){
+    string input;
+    getline(cin, input);
+    
+    cout << "Print : ";
+
+    for(int i = 0; i < (int) input.size(); i++){
+        if(input[i] == '-' && (input[i-1] == '+' || input[i-1] == '-' ||input[i-1] == '*' || input[i-1] == '/'|| input[i-1] == '%' )){
             cout << "-1 * ";
         }
-        else if (kata[x] == '-' && (kata[x-1] >= '0'|| kata[x-2] >= '0')){
-            cout << " " << kata[x] << " ";
+        else if (input[i] == '-' && (input[i-1] >= '0'|| input[i-2] >= '0')){
+            cout << " " << input[i] << " ";
         } 
-        else if (kata[x] == '-' && kata[x+1] >= '0'){
-            cout << kata[x];
+        else if (input[i] == '-' && input[i+1] >= '0'){
+            cout << input[i];
         }
-        else if (kata[x-1] >= '0' && kata[x] == '-' ){
-            cout << " " << kata[x] << " ";
+        else if (input[i-1] >= '0' && input[i] == '-' ){
+            cout << " " << input[i] << " ";
         }
-        else if (kata[x] == '-' && kata[x+1] == '(' ){ 
+        else if (input[i] == '-' && input[i+1] == '(' ){ 
             cout << "-1 * ";
         }    
-        else if (kata[x] >= '0'){
-            cout << kata[x];
+        else if (input[i] >= '0'){
+            cout << input[i];
         }
-        else if (kata[x] == '('){
-            cout << kata[x] << " ";
+        else if (input[i] == '('){
+            cout << input[i] << " ";
         }
-        else if (kata[x] == ')'){
-            cout << " " << kata[x];
+        else if (input[i] == ')'){
+            cout << " " << input[i];
         }
+        else if (input[i] == '-' && (input[i-1] == '*' || input[i-1] == '+' || input[i-1] == '-' || input[i-1] == '/' || input[i-1] == '%')){
+            cout << "-1 * ";
+        }
+        else if (input[i] == '-' || input[i] == '+' || input[i] '*' || input[i] == '/' || input[i] == '%'){
+            cout << " " << input[i] << " ";
+        }
+    }
+    
+    return 0;
+}
