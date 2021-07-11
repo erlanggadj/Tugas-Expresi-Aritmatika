@@ -2,8 +2,6 @@
 //Aniisah Mufiidah Suharso 2017051012
 //Muhammad Hanif 2017051004
 
-//HACKERRANK
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -89,7 +87,10 @@ void inputInfix(){
 
 int main(){
     inputInfix();
+    cout << "Print : ";
     for (auto x = infix.begin(); x != infix.end(); ++x){
 		cout << *x << " ";
 	}
+	
+	return 0;
 }
