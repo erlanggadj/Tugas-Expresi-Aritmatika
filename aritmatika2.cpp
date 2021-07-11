@@ -35,3 +35,8 @@ bool grande(string r, string s){
 }
 
 vector <string> infix; vector <string> postfix; string temp; vector <string>::iterator remake; vector <string>::iterator itu;
+
+int main(){
+    MasukkanData();
+    InfixtoPostfix();
+}
