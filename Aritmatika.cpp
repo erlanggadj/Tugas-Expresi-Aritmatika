@@ -31,5 +31,5 @@ for(int x = 0; x < N ; x++){
             cout << kata[x] << " ";
         }
         else if (kata[x] == ')'){
-            cout << kata[x];
+            cout << " " << kata[x];
         }
