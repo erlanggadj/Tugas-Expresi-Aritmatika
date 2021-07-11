@@ -35,20 +35,20 @@ bool isOperator (char ch){
 	}
 }
 
-int compare (char pre){
+int compare (string pre){
 	int a;
 	
-	if (pre == '*' || pre == '/' || pre == '%'){
+	if (pre == "*" || pre == "/" || pre == "%"){
 		a = 2;
 	}
-	else if (pre == '+' || pre == '-'){
+	else if (pre == "+" || pre == "-"){
 		a = 1;
 	}
 	
 	return a;
 }
 
-bool precedence (char a, char b){
+bool precedence (string a, string b){
 	int value1, value2;
 	value1 = compare(a);
 	value2 = compare(b);
@@ -108,36 +108,39 @@ void inputInfix(){
 	//}
 }
 
+vector <string>::iterator j;
+
 void toPostfix(){
-	for (auto j = infix.begin(); j != infix.end(); ++j){
-		if (isOperand(infix[j])){
-			postfix.push_back(infix[j]);
+	int y = 0;
+	for (j = infix.begin(); j != infix.end(); j++, y++){
+		if (isdigit(infix[y].back())){
+			postfix.push_back(infix[y]);
 			continue;
 		}
-		if (infix[j] == '('){
-			P.push(infix[j]);
+		if (infix[y] == "("){
+			P.push(infix[y]);
 			continue;
 		}
-		if (infix[j] == ')'){
-			while (!P.empty() && (P.top() != '(')){
+		if (infix[y] == ")"){
+			while (!P.empty() && (P.top() != "(")){
 				add = P.top();
 				postfix.push_back(add);
-				P.pop()
+				P.pop();
 			}
 			P.pop();
 			continue;
 		}
-		if (isOperator(infix[j])){
-			if (P.empty() || (P.top() == '(')){
-				P.push(infix[j]);
+		if (isOperator(infix[y][0])){
+			if (P.empty() || (P.top() == "(")){
+				P.push(infix[y]);
 			}
 			else {
-				while (!P.empty() && (P.top() != '(') && precedence(infix[j], P.top())){
+				while (!P.empty() && (P.top() != "(") && precedence(infix[y], P.top())){
 					add = P.top();
 					postfix.push_back(add);
 					P.pop();
 				}
-				P.push(infix[j]);
+				P.push(infix[y]);
 			}
 			continue;
 		}
@@ -153,6 +156,7 @@ void toPostfix(){
 int main(){
 	
 	inputInfix();
+	toPostfix();
 	for (auto x = postfix.begin(); x != postfix.end(); ++x){
 		cout << *x << " ";
 	}
